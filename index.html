@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carta do Cravo-da-Índia — Relatório Gerencial</title>
+<style>
+    :root {
+        --verde-escuro: #1b4332;
+        --verde: #2d6a4f;
+        --verde-medio: #40916c;
+        --verde-claro: #74c69d;
+        --verde-suave: #d8f3dc;
+        --bordo: #7b2d26;
+        --terra: #b5651d;
+        --dourado: #c9a227;
+        --cinza-texto: #333;
+        --bg: #f4f7f2;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: var(--cinza-texto);
+        background: var(--bg);
+        line-height: 1.65;
+    }
+
+    /* CABEÇALHO */
+    header {
+        background: linear-gradient(135deg, var(--verde-escuro) 0%, var(--verde-medio) 100%);
+        color: #fff;
+        padding: 50px 40px 60px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    header::after {
+        content: "";
+        position: absolute;
+        right: -40px;
+        bottom: -40px;
+        width: 220px;
+        height: 220px;
+        background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
+        border-radius: 50%;
+    }
+
+    .selo-cravo {
+        font-size: 64px;
+        line-height: 1;
+        margin-bottom: 15px;
+        filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
+    }
+
+    header h1 {
+        font-size: 2.6rem;
+        font-weight: 800;
+        letter-spacing: 1px;
+        margin-bottom: 10px;
+    }
+
+    header .subtitulo {
+        font-size: 1.1rem;
+        opacity: 0.92;
+        max-width: 760px;
+    }
+
+    header .meta {
+        margin-top: 22px;
+        display: inline-flex;
+        gap: 24px;
+        flex-wrap: wrap;
+        background: rgba(255,255,255,0.12);
+        padding: 12px 22px;
+        border-radius: 50px;
+        font-size: 0.92rem;
+    }
+
+    header .meta span { display: flex; align-items: center; gap: 8px; }
+
+    /* CONTAINER */
+    .container {
+        max-width: 1080px;
+        margin: -35px auto 60px;
+        padding: 0 24px;
+        position: relative;
+        z-index: 2;
+    }
+
+    /* PREÂMBULO */
+    .preambulo {
+        background: #fff;
+        border-radius: 16px;
+        padding: 34px 38px;
+        box-shadow: 0 10px 30px rgba(27,67,50,0.10);
+        border-left: 6px solid var(--dourado);
+        margin-bottom: 40px;
+    }
+
+    .preambulo h2 {
+        color: var(--verde-escuro);
+        font-size: 1.5rem;
+        margin-bottom: 14px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .preambulo p { text-align: justify; color: #444; }
+
+    /* SEÇÃO TÍTULO */
+    .secao-titulo {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        margin: 50px 0 26px;
+    }
+
+    .secao-titulo .num {
+        background: var(--verde);
+        color: #fff;
+        font-weight: 800;
+        font-size: 1.2rem;
+        min-width: 46px;
+        height: 46px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 10px rgba(45,106,79,0.35);
+    }
+
+    .secao-titulo h2 {
+        color: var(--verde-escuro);
+        font-size: 1.7rem;
+    }
+
+    /* GRID DE EIXOS */
+    .eixos-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+        gap: 24px;
+    }
+
+    .card {
+        background: #fff;
+        border-radius: 14px;
+        overflow: hidden;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.07);
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 14px 30px rgba(27,67,50,0.18);
+    }
+
+    .card-head {
+        padding: 18px 22px;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .card-head .icone { font-size: 1.7rem; }
+    .card-head h3 { font-size: 1.12rem; font-weight: 700; }
+
+    .card-body { padding: 20px 24px 24px; }
+
+    .contexto {
+        background: var(--verde-suave);
+        border-radius: 8px;
+        padding: 12px 14px;
+        font-size: 0.9rem;
+        color: var(--verde-escuro);
+        margin-bottom: 16px;
+    }
+
+    .contexto strong { display: block; margin-bottom: 4px; }
+
+    .prop-titulo {
+        font-size: 0.82rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: var(--terra);
+        font-weight: 700;
+        margin-bottom: 10px;
+    }
+
+    .card-body ul { list-style: none; }
+
+    .card-body li {
+        position: relative;
+        padding-left: 24px;
+        margin-bottom: 12px;
+        font-size: 0.93rem;
+        color: #3a3a3a;
+    }
+
+    .card-body li::before {
+        content: "🌿";
+        position: absolute;
+        left: 0;
+        top: 1px;
+        font-size: 0.85rem;
+    }
+
+    /* Cores variadas dos cabeçalhos */
+    .c1 { background: linear-gradient(120deg, #1b4332, #2d6a4f); }
+    .c2 { background: linear-gradient(120deg, #2d6a4f, #40916c); }
+    .c3 { background: linear-gradient(120deg, #40916c, #52b788); }
+    .c4 { background: linear-gradient(120deg, #b5651d, #d68c45); }
+    .c5 { background: linear-gradient(120deg, #7b2d26, #a8443b); }
+    .c6 { background: linear-gradient(120deg, #386641, #6a994e); }
+    .c7 { background: linear-gradient(120deg, #b08900, #c9a227); }
+
+    /* COMPROMISSOS */
+    .compromissos {
+        background: linear-gradient(135deg, var(--verde-escuro), var(--verde-medio));
+        color: #fff;
+        border-radius: 18px;
+        padding: 40px;
+        margin-top: 50px;
+    }
+
+    .compromissos h2 {
+        font-size: 1.7rem;
+        margin-bottom: 28px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .comp-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 22px;
+    }
+
+    .comp-box {
+        background: rgba(255,255,255,0.10);
+        border-radius: 12px;
+        padding: 22px;
+        border-top: 4px solid var(--dourado);
+    }
+
+    .comp-box h4 {
+        font-size: 1.05rem;
+        margin-bottom: 12px;
+        color: #ffe89e;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .comp-box p, .comp-box li { font-size: 0.92rem; opacity: 0.95; }
+    .comp-box ul { list-style: none; }
+    .comp-box li { padding-left: 18px; position: relative; margin-bottom: 8px; }
+    .comp-box li::before {
+        content: "▸"; position: absolute; left: 0; color: var(--dourado);
+    }
+
+    /* ASSINATURA */
+    .assinatura {
+        background: #fff;
+        border-radius: 14px;
+        padding: 30px 34px;
+        margin-top: 30px;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.07);
+        text-align: center;
+        border-bottom: 5px solid var(--dourado);
+    }
+
+    .assinatura p { color: #444; margin-bottom: 18px; }
+
+    .apoio-titulo {
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        color: var(--verde);
+        font-weight: 700;
+        margin-bottom: 14px;
+    }
+
+    .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+    }
+
+    .tag {
+        background: var(--verde-suave);
+        color: var(--verde-escuro);
+        padding: 6px 16px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 600;
+    }
+
+    .endosso {
+        margin-top: 22px;
+        font-style: italic;
+        color: var(--verde);
+        font-size: 0.92rem;
+    }
+
+    /* RODAPÉ */
+    footer {
+        text-align: center;
+        padding: 30px 20px;
+        color: #777;
+        font-size: 0.85rem;
+    }
+
+    @media (max-width: 600px) {
+        header h1 { font-size: 1.9rem; }
+        .preambulo, .compromissos, .assinatura { padding: 24px; }
+    }
+</style>
+</head>
+<body>
+
+<header>
+    <div class="selo-cravo">🌸</div>
+    <h1>Carta do Cravo-da-Índia</h1>
+    <p class="subtitulo">Documento síntese resultante do Seminário Científico sobre o Cravo-da-Índia: Desafios e Potencialidades</p>
+    <div class="meta">
+        <span>📍 Cruz das Almas — BA</span>
+        <span>📅 20 de agosto de 2025</span>
+        <span>🌿 <em>Syzygium aromaticum</em></span>
+    </div>
+</header>
+
+<div class="container">
+
+    <!-- PREÂMBULO -->
+    <section class="preambulo">
+        <h2>📜 Preâmbulo</h2>
+        <p>Reunidos no I Seminário Científico sobre o Cravo-da-índia (<em>Syzygium aromaticum</em>): Desafios e Potencialidades, realizado no Auditório Manihot da Embrapa Mandioca e Fruticultura, produtores, pesquisadores, técnicos, estudantes e gestores públicos debateram os principais entraves e oportunidades da cadeia produtiva do cravo-da-índia. Com o objetivo de construir uma agenda colaborativa e propositiva, este documento consolida as principais deliberações e encaminhamentos acordados durante o evento, considerando a viabilidade técnica, científica e política de cada proposta.</p>
+    </section>
+
+    <!-- SEÇÃO 1 -->
+    <div class="secao-titulo">
+        <div class="num">1</div>
+        <h2>Eixos Estratégicos e Proposições Fundamentadas</h2>
+    </div>
+
+    <div class="eixos-grid">
+
+        <!-- 1.1 -->
+        <article class="card">
+            <div class="card-head c1">
+                <span class="icone">🤝</span>
+                <h3>1.1 Governança e Articulação em Rede</h3>
+            </div>
+            <div class="card-body">
+                <div class="contexto">
+                    <strong>Contexto conhecido:</strong>
+                    A cadeia do cravo-da-índia carece de articulação institucional sistemática, com ações fragmentadas entre pesquisa, produção e comercialização.
+                </div>
+                <div class="prop-titulo">Proposições concretas</div>
+                <ul>
+                    <li>Criar um <strong>Comitê Gestor Territorial do Cravo-da-Índia</strong> com representantes de SDR, EMBRAPA, IF Baiano, UFRB, MAPA e associações de produtores, para pactuação de metas e monitoramento.</li>
+                    <li>Mapear e diagnosticar as organizações existentes (cooperativas/associações) para fortalecer a representatividade e a governança participativa.</li>
+                    <li>Estabelecer um <strong>Arranjo Produtivo Local (APL)</strong> com foco em bioeconomia, alinhado à Estratégia Nacional de Bioeconomia (Decreto nº 12.044/2024).</li>
+                </ul>
+            </div>
+        </article>
+
+        <!-- 1.2 -->
+        <article class="card">
+            <div class="card-head c2">
+                <span class="icone">🔬</span>
+                <h3>1.2 Pesquisa, Inovação e Conhecimento</h3>
+            </div>
+            <div class="card-body">
+                <div class="contexto">
+                    <strong>Contexto conhecido:</strong>
+                    Há carência de pesquisas aplicadas e validação tecnológica, especialmente em fitossanidade, colheita e manejo sustentável.
+                </div>
+                <div class="prop-titulo">Proposições prioritárias e exequíveis</div>
+                <ul>
+                    <li>Criar um grupo de pesquisa no CNPq para integrar estudos sobre solos, fitossanidade, pós-colheita e melhoramento genético.</li>
+                    <li>Desenvolver alternativas à colheita química com Ethrel, com testes de reguladores vegetais e métodos mecânicos ou manuais eficientes.</li>
+                    <li>Mapear a distribuição e severidade de doenças (ex: Cytospora) com drones e sensoriamento remoto de baixo custo.</li>
+                    <li>Publicar um manual de práticas emergenciais para o combate à morte súbita do craveiro, com linguagem acessível e distribuição em comunidades.</li>
+                    <li>Estudar fungos endofíticos para controle biológico e resiliência fitossanitária, em parceria com universidades e Biofábrica da Bahia.</li>
+                </ul>
+            </div>
+        </article>
+
+        <!-- 1.3 -->
+        <article class="card">
+            <div class="card-head c3">
+                <span class="icone">👨‍🌾</span>
+                <h3>1.3 Assistência Técnica e Extensão Rural (ATER)</h3>
+            </div>
+            <div class="card-body">
+                <div class="contexto">
+                    <strong>Contexto conhecido:</strong>
+                    A ausência de ATER especializada limita a adoção de boas práticas e a agregação de valor.
+                </div>
+                <div class="prop-titulo">Proposições realizáveis</div>
+                <ul>
+                    <li>Implementar editais de ATER específicos para o cravo-da-índia, com foco em manejo sustentável, certificação e gestão associativa.</li>
+                    <li>Produzir cartilhas, vídeos e cursos EaD sobre secagem, classificação, controle de pragas, manejo do solo e acesso a mercados.</li>
+                    <li>Valorizar e registrar saberes tradicionais em sistemas de produção, em diálogo com o conhecimento técnico-científico.</li>
+                </ul>
+            </div>
+        </article>
+
+        <!-- 1.4 -->
+        <article class="card">
+            <div class="card-head c4">
+                <span class="icone">💰</span>
+                <h3>1.4 Acesso a Crédito e Financiamento</h3>
+            </div>
+            <div class="card-body">
+                <div class="contexto">
+                    <strong>Contexto conhecido:</strong>
+                    Produtores têm dificuldade em acessar crédito rural por falta de projetos técnicos e informações econômicas setoriais.
+                </div>
+                <div class="prop-titulo">Proposições viáveis</div>
+                <ul>
+                    <li>Elaborar modelos de planos de negócios e estudos de viabilidade econômica para apresentar a agentes financeiros (BNB, Pronaf, BNDES).</li>
+                    <li>Articular chamadas públicas específicas para a cadeia do cravo em fundos como Finep, FAPESB e CNPq.</li>
+                    <li>Sensibilizar o BNDES para linhas verdes (Fundo Clima) e bioeconomia.</li>
+                </ul>
+            </div>
+        </article>
+
+        <!-- 1.5 -->
+        <article class="card">
+            <div class="card-head c5">
+                <span class="icone">🏭</span>
+                <h3>1.5 Infraestrutura e Agregação de Valor</h3>
+            </div>
+            <div class="card-body">
+                <div class="contexto">
+                    <strong>Contexto conhecido:</strong>
+                    A deficiência em infraestrutura de beneficiamento e secagem causa perdas e reduz a qualidade do produto.
+                </div>
+                <div class="prop-titulo">Proposições concretas</div>
+                <ul>
+                    <li>Implantar unidades de processamento comunitárias com secadores solares ou à biomassa.</li>
+                    <li>Desenvolver e difundir tecnologias de baixo custo para detecção precoce de doenças e beneficiamento.</li>
+                    <li>Fomentar o uso de energias renováveis em unidades de processamento, alinhado a políticas de bioeconomia.</li>
+                </ul>
+            </div>
+        </article>
+
+        <!-- 1.6 -->
+        <article class="card">
+            <div class="card-head c6">
+                <span class="icone">🌱</span>
+                <h3>1.6 Sustentabilidade e Saúde do Solo</h3>
+            </div>
+            <div class="card-body">
+                <div class="contexto">
+                    <strong>Contexto conhecido:</strong>
+                    Solos degradados e dependência de insumos químicos ameaçam a sustentabilidade da cultura.
+                </div>
+                <div class="prop-titulo">Proposições baseadas em políticas existentes</div>
+                <ul>
+                    <li>Implementar programas de análise e monitoramento de solos via CAR/SDR e ADAB.</li>
+                    <li>Incentivar bioinsumos e adubação orgânica, com apoio da Lei de Bioinsumos (Lei 15.070/2024) e da Política Estadual de Agroecologia (Lei 14.564/2023).</li>
+                    <li>Desenvolver protocolos de manejo sustentável adaptados ao Baixo Sul da Bahia.</li>
+                </ul>
+            </div>
+        </article>
+
+        <!-- 1.7 -->
+        <article class="card">
+            <div class="card-head c7">
+                <span class="icone">📈</span>
+                <h3>1.7 Políticas Públicas e Mercado</h3>
+            </div>
+            <div class="card-body">
+                <div class="contexto">
+                    <strong>Contexto conhecido:</strong>
+                    O cravo-da-índia possui potencial inexplorado em mercados de nicho (cosméticos, fármacos, gastronomia).
+                </div>
+                <div class="prop-titulo">Proposições alinhadas a marcos legais</div>
+                <ul>
+                    <li>Incluir a cultura no Bahia que Produz e Alimenta e no Parceiros da Mata.</li>
+                    <li>Promover certificações (Indicação Geográfica, Selo Orgânico, Sociobiodiversidade) para agregação de valor.</li>
+                    <li>Articular a cadeia com a Estratégia Nacional de Bioeconomia e editais de cooperação internacional.</li>
+                </ul>
+            </div>
+        </article>
+
+    </div>
+
+    <!-- SEÇÃO 2 - COMPROMISSOS -->
+    <section class="compromissos">
+        <h2>✅ 2. Compromissos e Encaminhamentos</h2>
+        <div class="comp-grid">
+            <div class="comp-box">
+                <h4>👥 Atores Responsáveis</h4>
+                <ul>
+                    <li>Embrapa — pesquisa</li>
+                    <li>IF Baiano — formação</li>
+                    <li>SDR — políticas e ATER</li>
+                    <li>Associações — organização produtiva</li>
+                    <li>FAPESB / Finep — fomento</li>
+                </ul>
+            </div>
+            <div class="comp-box">
+                <h4>📆 Agenda de Curto Prazo (2026)</h4>
+                <ul>
+                    <li>Criação do Comitê Gestor</li>
+                    <li>Grupo de pesquisa no CNPq</li>
+                    <li>Edital de ATER específico</li>
+                    <li>Publicação do manual de morte súbita</li>
+                </ul>
+            </div>
+            <div class="comp-box">
+                <h4>📊 Monitoramento</h4>
+                <p>O Comitê Gestor será responsável por acompanhar os indicadores de implementação e articular os atores.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ASSINATURA -->
+    <section class="assinatura">
+        <p>Assinam esta carta os participantes do Seminário Científico sobre o Cravo-da-Índia, em <strong>Cruz das Almas, 20 de agosto de 2025</strong>.</p>
+        <div class="apoio-titulo">Apoio Institucional</div>
+        <div class="tags">
+            <span class="tag">Aprocravo</span>
+            <span class="tag">Ceplac</span>
+            <span class="tag">MAPA-SFA/BA</span>
+            <span class="tag">Senai-Cimatec</span>
+            <span class="tag">SDR</span>
+            <span class="tag">UESC</span>
+            <span class="tag">UESB</span>
+            <span class="tag">UFRB</span>
+            <span class="tag">Embrapa</span>
+            <span class="tag">IF Baiano</span>
+        </div>
+        <p class="endosso">Documento endossado pelas instituições participantes e aberto para adesões.</p>
+    </section>
+
+</div>
+
+<footer>
+    Relatório gerencial — Carta do Cravo-da-Índia &nbsp;•&nbsp; <em>Syzygium aromaticum</em> &nbsp;•&nbsp; Cruz das Almas, 2025
+</footer>
+
+</body>
+</html>
